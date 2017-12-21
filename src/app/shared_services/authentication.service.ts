@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthenticationService {
 
-public userLoged: string = "aa";
+public userLoged: string = "";
 
     constructor(
         private http: HttpClient) { }
@@ -36,7 +36,7 @@ public userLoged: string = "aa";
 
         if (localStorage.getItem('currentUser')) { 
             let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            this.userLoged = currentUser.firstName + " " + currentUser.lastName;
+            this.userLoged = currentUser.firstName + " " + currentUser.lastName + "  ";
 
             return true;
         }

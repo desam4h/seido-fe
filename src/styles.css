@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+}
+
+html, body {
+    width: 100%;
+    height: 99%;
+    font-size: 14px;
+}
+
+/** ========================== LOADING APP - BEGIN ==================== */ 
+app-root {
+	background-color: rgba(39, 60, 113, 0.65);
+}
+
+/** ========================== LOADING APP - END ==================== */ 
+
+
+/** ========================== CRUD CSS - BEGIN ==================== */ 
+.crud-list > button {
+	float: right;
+	margin-bottom: 10px;
+}
+.list_filtered {
+	display: table;
+}
+
+.form_filtered {
+	display: none;
+}
+
+/** ========================== CRUD CSS - END ==================== */ 
+.btn-create, .btn-success {
+	background-color: #57c7af;
+}

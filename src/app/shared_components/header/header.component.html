@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  
+  <a class="navbar-brand" href="/">
+    <i class="fa fa-user-md" aria-hidden="true"></i> Registros Clínicos
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">
+        <a class="nav-link" routerLink="/company">Empresas</a>
+      </li>
+      <li class="nav-item" *ngIf="auth.isAuthenticated() && auth.isCurrentUserAdmin()">
+        <a class="nav-link" routerLink="/specialty">Especialidades</a>
+      </li>
+      <li class="nav-item" *ngIf="auth.isAuthenticated() && auth.isCurrentUserOperator()">
+        <a class="nav-link" routerLink="/patient">Pacientes</a>
+      </li>
+    </ul>
+
+    <div class="form-inline my-2 my-lg-0">
+
+      <i *ngIf="auth.isAuthenticated()" style="color:white">{{auth.userLoged}}</i>
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="!auth.isAuthenticated()">
+          <a class="nav-link pointer" routerLink="/login">Iniciar sesión</a>
+        </li>
+        <li class="nav-item" *ngIf="auth.isAuthenticated()">
+          <a class="nav-link pointer" (click)="logout()">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</nav>

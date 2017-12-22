@@ -6,9 +6,9 @@
         Crear Empresa
     </button>
 
-    <table class="table table-striped table-condensed">
+    <table class="table table-hover table-striped table-condensed">
       <thead>
-        <tr>
+        <tr class="table-primary">
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">NIT</th>
@@ -21,11 +21,11 @@
           <td>{{company.name}}</td>
           <td>{{company.nit}}</td>
           <td>
-            <button class="btn btn-primary btn-xs" type="button" data-toggle="modal" data-target="#companyForm" (click)="onSelectDetail(company)">
-              <i class="fa fa-pencil" aria-hidden="true"></i> Editar
+            <button class="btn btn-info btn-xs" type="button" data-toggle="modal" data-target="#companyForm" (click)="onSelectDetail(company)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
-            <button class="btn btn-danger btn-xs" type="button" (click)="onDelete(company)">
-              <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+            <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#delcompanyForm" (click)="onSelectDelete(company)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
           </td>
         </tr>
@@ -60,26 +60,48 @@
 <div class="modal fade" id="companyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedCompany">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
-      <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Empresa - Info</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Detalles de Empresa</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <form>
+              <div class="form-group">
+                  <label for="name">Nombre</label>
+                  <input type="text" class="form-control" placeholder="Nombre" id="name" name="name" required [(ngModel)]="selectedCompany.name">
+              </div>
+              <div class="form-group">
+                  <label for="nit">NIT</label>
+                  <input type="text" class="form-control" placeholder="NIT" id="nit" name="nit" required [(ngModel)]="selectedCompany.nit">
+              </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onSave()">Guardar</button>
+        </div>
       </div>
-      <div class="modal-body">
-          <form>
-            <div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="email" class="form-control" placeholder="Nombre" id="name" name="name" required="true" [(ngModel)]="selectedCompany.name">
-            </div>
-            <div class="form-group">
-                <label for="nit">NIT</label>
-                <input type="text" class="form-control" placeholder="NIT" id="nit" name="nit"  [(ngModel)]="selectedCompany.nit">
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onSave()">Guardar</button>
-      </div>
+  </div>
+</div>
+
+
+<!-- Delete Company form -->
+<div class="modal fade" id="delcompanyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedCompany">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Eliminar Empresa</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <p>
+             ¿Está seguro que quiere eliminar la empresa?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onDelete()">Eliminar</button>
+        </div>
       </div>
   </div>
 </div>

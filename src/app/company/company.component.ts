@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Company } from './company.model';
 import { CompanyService } from './company.service';
+import { AlertService } from '../shared_services/alert.service';
 
 @Component({
   selector: 'company',
@@ -14,61 +15,82 @@ export class CompanyComponent implements OnInit {
   private editMode: boolean;
 
   constructor(
-    private service: CompanyService) { }
+    private service: CompanyService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.updateList();
   }
 
   onSelectDetail(company:Company) : void {
-    this.selectedCompany = {...company};
+    this.selectedCompany = company;
     this.editMode = true;
   }
 
   onSelectNew() : void {
     this.selectedCompany = Company.empty();
+    this.editMode = false;
   }
+
+  onSelectDelete(company: Company) : void {
+    this.selectedCompany = company;
+  } 
 
   onSave() : void {
-    if (this.editMode) {
-      this.service.update(this.selectedCompany).subscribe(
-        company => {
-          this.selectedCompany = null;
-          this.updateList();
-        },
-        error => console.log("Error updatingCompany ", error)
-      );
-    } else {
-      this.service.save(this.selectedCompany).subscribe(
-        company => {
-          this.selectedCompany = company;
-          this.companyList.push(company);
-        },
-        error => console.log("Error savingCompany ", error)
-      );
+    if(this.selectedCompany.name != null && this.selectedCompany.nit != null
+      && this.selectedCompany.name != '' && this.selectedCompany.nit != ''){
+
+        if (this.editMode) {
+          this.service.update(this.selectedCompany).subscribe(
+            company => {
+              this.selectedCompany = null;
+              this.updateList();
+            },
+            error => {
+              this.alertService.error('Ocurrió un error actualizando la empresa');
+              console.log("Error updating Company ", error);
+            }
+          );
+        } else {
+          this.service.save(this.selectedCompany).subscribe(
+            company => {
+              this.selectedCompany = null;
+              this.updateList();
+            },
+            error => {
+              this.alertService.error('Ocurrió un error creando la empresa');
+              console.log("Error saving Company ", error);
+            }
+          );
+        }
+    }else{
+      this.alertService.error('Los dos campos son obligatorios');
     }
   }
 
-  onDelete(company:Company) :void {
-    if(confirm("Está seguro de eliminar la empresa?")) {
-      this.service.delete(company).subscribe(
+  onDelete() :void {
+      this.service.delete(this.selectedCompany).subscribe(
         resp => {
-          if(resp.ok) {
-            this.updateList();
-          }
+          this.selectedCompany = null;
+          this.updateList();
+          this.alertService.success('Empresa eliminada correctamente');
         },
-        error => alert("No es posible eliminar la empresa.")
+        error =>{
+          this.alertService.error('Ocurrió un error eliminando la empresa');
+          console.log("Error deleting Company ", error);
+        }
       );
-    }
   }
 
   private updateList() : void {
+    this.alertService.clear();
     this.service.list().subscribe(
       companies => {
         this.companyList = companies;
       },
       error => {
-        console.log("Error listingCompanies ::: ", error);
+        this.alertService.error('Ocurrió un error listando las empresas');
+        console.log("Error listing Companies ::: ", error);
       }
     );
   }

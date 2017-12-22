@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8080',
+  apiBaseUrl: 'https://registros-core.herokuapp.com/',
   callbackUrl: 'http://localhost:4200/callback'
 };

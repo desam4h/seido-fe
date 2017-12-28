@@ -32,11 +32,12 @@ export class CompanyComponent implements OnInit {
     this.editMode = false;
   }
 
-  onSelectDelete(company: Company) : void {
+  onSelectDelete(company: Company): void {
     this.selectedCompany = company;
-  } 
+    this.editMode = false;
+  }
 
-  onSave() : void {
+  onSave(): void {
     if(this.selectedCompany.name != null && this.selectedCompany.nit != null
       && this.selectedCompany.name != '' && this.selectedCompany.nit != ''){
 
@@ -68,7 +69,7 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  onDelete() :void {
+  onDelete(): void {
       this.service.delete(this.selectedCompany).subscribe(
         resp => {
           this.selectedCompany = null;
@@ -82,7 +83,7 @@ export class CompanyComponent implements OnInit {
       );
   }
 
-  private updateList() : void {
+  private updateList(): void {
     this.alertService.clear();
     this.service.list().subscribe(
       companies => {

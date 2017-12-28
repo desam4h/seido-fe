@@ -1,12 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
 import { Company } from './company.model';
-
 
 @Injectable()
 export class CompanyService {

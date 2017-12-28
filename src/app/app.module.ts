@@ -19,6 +19,7 @@ import { AlertService } from './shared_services/alert.service';
 import { AuthenticationService } from './shared_services/authentication.service';
 import { UserService } from './shared_services/user.service';
 import { CompanyService } from './company/company.service';
+import { SpecialtyService } from './specialty/specialty.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CompanyService } from './company/company.service';
     AlertService,
     AuthenticationService,
     UserService,
-    CompanyService
+    CompanyService,
+    SpecialtyService
   ],
   bootstrap: [AppComponent]
 })

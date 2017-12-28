@@ -1,3 +1,85 @@
-<p>
-  specialty works!
-</p>
+<div class="container">
+  <div class="crud-list">
+    <h1>Especialidades</h1>
+
+    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#specialtyForm" (click)="onSelectNew()">
+        Crear Especialidad
+    </button>
+
+    <table class="table table-hover table-striped table-condensed">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let specialty of specialtyList">
+          <td>{{specialty.id}}</td>
+          <td>{{specialty.name}}</td>
+          <td>
+            <a class="btn btn-info btn-xs" [routerLink]="['/specialty', specialty.id, 'survey-template']" title="Encuestas">
+              <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+            <button class="btn btn-info btn-xs" type="button" data-toggle="modal" data-target="#specialtyForm"
+              (click)="onSelectDetail(specialty)" title="Editar">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#delspecialtyForm"
+              (click)="onSelectDelete(specialty)" title="Eliminar">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- Specialty form -->
+<div class="modal fade" id="specialtyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedSpecialty">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Detalles de Especialidad</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" placeholder="Name" id="name" name="name" required="true" [(ngModel)]="selectedSpecialty.name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onSave()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Company form -->
+<div class="modal fade" id="delspecialtyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedSpecialty">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Eliminar Especialidad</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          ¿Está seguro que quiere eliminar la especialidad?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onDelete()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

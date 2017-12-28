@@ -38,7 +38,7 @@ public userLoged: string = "";
 
         if (localStorage.getItem('currentUser')) { 
             let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            this.userLoged = currentUser.firstName + " " + currentUser.lastName + "  ";
+            this.userLoged = currentUser.firstName + " " + currentUser.lastName;
 
             return true;
         }

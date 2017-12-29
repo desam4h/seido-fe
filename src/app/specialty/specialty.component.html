@@ -3,7 +3,7 @@
     <h1>Especialidades</h1>
 
     <button class="btn btn-info" type="button" data-toggle="modal" data-target="#specialtyForm" (click)="onSelectNew()">
-        Crear Especialidad
+      Crear Especialidad
     </button>
 
     <table class="table table-hover table-striped table-condensed">
@@ -51,7 +51,7 @@
         <form>
           <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" class="form-control" placeholder="Name" id="name" name="name" required="true" [(ngModel)]="selectedSpecialty.name">
+            <input type="text" class="form-control" placeholder="Nombre" id="name" name="name" required="true" [(ngModel)]="selectedSpecialty.name">
           </div>
         </form>
       </div>
@@ -78,7 +78,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onDelete()">Eliminar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onDelete()">Eliminar</button>
       </div>
     </div>
   </div>

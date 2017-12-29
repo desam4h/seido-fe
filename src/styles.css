@@ -34,6 +34,18 @@ app-root {
 }
 
 /** ========================== CRUD CSS - END ==================== */ 
+
 .btn-create, .btn-success {
 	background-color: #57c7af;
 }
+
+.btn{
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+table td{
+    padding:4px;
+    padding-left: 10px;
+ }

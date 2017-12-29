@@ -49,7 +49,7 @@ export class CompanyComponent implements OnInit {
             },
             error => {
               this.alertService.error('Ocurrió un error actualizando la empresa');
-              console.log("Error updating Company ", error);
+              console.log("Error updating Company ::: ", error);
             }
           );
         } else {
@@ -60,12 +60,12 @@ export class CompanyComponent implements OnInit {
             },
             error => {
               this.alertService.error('Ocurrió un error creando la empresa');
-              console.log("Error saving Company ", error);
+              console.log("Error saving Company ::: ", error);
             }
           );
         }
     }else{
-      this.alertService.error('Los dos campos son obligatorios');
+      this.alertService.error('Todos los campos son obligatorios');
     }
   }
 
@@ -78,7 +78,7 @@ export class CompanyComponent implements OnInit {
         },
         error =>{
           this.alertService.error('Ocurrió un error eliminando la empresa');
-          console.log("Error deleting Company ", error);
+          console.log("Error deleting Company ::: ", error);
         }
       );
   }

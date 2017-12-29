@@ -4,32 +4,31 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
-import { Specialty, SpecialtyStatistic } from './specialty.model';
+import { Specialty } from './specialty.model';
 
 @Injectable()
 export class SpecialtyService {
-  private endpoint:string = environment.apiBaseUrl + "/specialty";
+  private endpoint: string = environment.apiBaseUrl + "/specialty";
 
   constructor(private http: HttpClient) { }
 
-  list() : Observable<Specialty []> {
+  list(): Observable<Specialty []> {
     return this.http.get(this.endpoint, this.jwt()).map(resp => <Specialty[]>resp);
   }
 
-  save(specialty:Specialty) : Observable<Specialty> {
+  save(specialty:Specialty): Observable<Specialty> {
     return this.http.post(this.endpoint, specialty, this.jwt()).map(resp => <Specialty>resp);
   }
 
-
-  find(specialtyId:number) : Observable<Specialty> {
+  find(specialtyId:number): Observable<Specialty> {
     return this.http.get(`${this.endpoint}/${specialtyId}`, this.jwt()).map(resp => <Specialty>resp);
   }
 
-  update(specialty:Specialty) : Observable<Specialty> {
+  update(specialty:Specialty): Observable<Specialty> {
     return this.http.put(this.endpoint, specialty, this.jwt()).map(resp => <Specialty>resp);
   }
 
-  delete(specialty:Specialty) : Observable<any> {
+  delete(specialty:Specialty): Observable<any> {
     return this.http.delete(this.endpoint + '/' + specialty.id, this.jwt());
   }
   

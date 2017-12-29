@@ -38,7 +38,7 @@ export class SpecialtyComponent {
   onSelectDelete(specialty: Specialty): void {
     this.selectedSpecialty = specialty;
     this.editMode = false;
-  } 
+  }
 
   onSave(): void {
     if(this.selectedSpecialty.name != null && this.selectedSpecialty.name != ''){
@@ -52,10 +52,11 @@ export class SpecialtyComponent {
           },
           error => {
             this.alertService.error('Ocurrió un error actualizando la especialidad');
-            console.log("Error updating Specialty ", error);
+            console.log("Error updating Specialty ::: ", error);
           }
         );
       } else {
+
         this.service.save(this.selectedSpecialty).subscribe(
           specialty => {
             this.selectedSpecialty = null;
@@ -63,7 +64,7 @@ export class SpecialtyComponent {
           },
           error => {
             this.alertService.error('Ocurrió un error creando la especialidad');
-            console.log("Error saving Specialty ", error);
+            console.log("Error saving Specialty ::: ", error);
           }
         );
       }
@@ -73,22 +74,22 @@ export class SpecialtyComponent {
   }
 
   onDelete(specialty: Specialty): void {
-        this.service.delete(this.selectedSpecialty).subscribe(
-          resp => {
-            this.selectedSpecialty = null;
-            this.updateList();
-            this.alertService.success('Especialidad eliminada correctamente');
-          },
-          error => {
-            if(error.status == 412) {
-              this.alertService.warning('La especialidad tiene dependencias que deben ser eliminadas primero');
-            }else {
-              this.alertService.error('Ocurrió un error eliminando la especialidad');
-              console.log("Error deleting Specialty ", error);
-            }
-          }
-        );
-    }
+    this.service.delete(this.selectedSpecialty).subscribe(
+      resp => {
+        this.selectedSpecialty = null;
+        this.updateList();
+        this.alertService.success('Especialidad eliminada correctamente');
+      },
+      error => {
+        if(error.status == 412) {
+          this.alertService.warning('La especialidad tiene dependencias que deben ser eliminadas primero');
+        }else {
+          this.alertService.error('Ocurrió un error eliminando la especialidad');
+          console.log("Error deleting Specialty ::: ", error);
+        }
+      }
+    );
+  }
 
   private updateList(): void {
     this.alertService.clear();

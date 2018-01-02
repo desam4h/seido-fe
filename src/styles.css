@@ -35,11 +35,7 @@ app-root {
 
 /** ========================== CRUD CSS - END ==================== */ 
 
-.btn-create, .btn-success {
-	background-color: #57c7af;
-}
-
-.btn{
+.btn-xs{
     padding: 4px 8px;
     font-size: 14px;
     border-radius: 10px;
@@ -48,4 +44,11 @@ app-root {
 table td{
     padding:4px;
     padding-left: 10px;
+ }
+ 
+ .patient-box {
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid rgb(87,199,175);
+    padding: 10px; 
  }

@@ -59,7 +59,7 @@ public userLoged: string = "";
     }
 
 
-    private logedUserHasRole(hasRole:string) : boolean {
+    private logedUserHasRole(hasRole: string) : boolean {
 
         if (localStorage.getItem('currentUser')) {
             
@@ -73,5 +73,9 @@ public userLoged: string = "";
         } else {
             return false;
         }
+    }
+
+    public canCreatePatient(): boolean {
+        return this.isCurrentUserAdmin();
     }
 }

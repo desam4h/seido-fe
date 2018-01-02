@@ -77,8 +77,12 @@ export class CompanyComponent implements OnInit {
           this.alertService.success('Empresa eliminada correctamente');
         },
         error =>{
-          this.alertService.error('Ocurrió un error eliminando la empresa');
-          console.log("Error deleting Company ::: ", error);
+          if(error.status == 424) {
+            this.alertService.warning('La empresa tiene dependencias que deben ser eliminadas primero');
+          }else {
+            this.alertService.error('Ocurrió un error eliminando la empresa');
+            console.log("Error deleting Company ::: ", error);
+          }
         }
       );
   }

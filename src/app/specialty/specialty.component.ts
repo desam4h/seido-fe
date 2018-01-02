@@ -81,7 +81,7 @@ export class SpecialtyComponent {
         this.alertService.success('Especialidad eliminada correctamente');
       },
       error => {
-        if(error.status == 412) {
+        if(error.status == 424) {
           this.alertService.warning('La especialidad tiene dependencias que deben ser eliminadas primero');
         }else {
           this.alertService.error('Ocurrió un error eliminando la especialidad');

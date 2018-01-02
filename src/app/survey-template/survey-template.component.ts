@@ -100,8 +100,12 @@ export class SurveyTemplateComponent {
         this.alertService.success('Plantilla eliminada correctamente');
       },
       error => {
-        this.alertService.error('Ocurrió un error eliminando la plantilla');
-        console.log("Error deleting Survey Template ::: ", error);
+        if(error.status == 424) {
+          this.alertService.warning('La plantilla tiene dependencias que deben ser eliminadas primero');
+        }else {
+          this.alertService.error('Ocurrió un error eliminando la plantilla');
+          console.log("Error deleting Survey Template ::: ", error);
+        }
       }
     );
   }

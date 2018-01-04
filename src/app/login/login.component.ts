@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService } from '../shared_services/alert.service';
 import { AuthenticationService } from '../shared_services/authentication.service';
+import { HeaderComponent } from '../shared_components/header/header.component';
 
 @Component({
   selector: 'app-login',

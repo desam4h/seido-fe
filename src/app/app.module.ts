@@ -17,10 +17,11 @@ import { PatientComponent } from './patient/patient.component';
 import { SurveyTemplateComponent } from './survey-template/survey-template.component';
 import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
+import { UserComponent } from './user/user.component';
 
 import { AlertService } from './shared_services/alert.service';
 import { AuthenticationService } from './shared_services/authentication.service';
-import { UserService } from './shared_services/user.service';
+import { UserService } from './user/user.service';
 import { CompanyService } from './company/company.service';
 import { SpecialtyService } from './specialty/specialty.service';
 import { SurveyTemplateService } from './survey-template/survey-template.service';
@@ -42,7 +43,8 @@ import { AuthGuard } from './shared_services/auth.guard';
     PatientComponent,
     SurveyTemplateComponent,
     EventComponent,
-    SurveyComponent
+    SurveyComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

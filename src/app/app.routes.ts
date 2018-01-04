@@ -8,6 +8,7 @@ import { PatientComponent } from './patient/patient.component';
 import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
 import { AuthGuard } from './shared_services/auth.guard';
+import { UserComponent } from './user/user.component';
 
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent},
@@ -18,6 +19,7 @@ export const ROUTES: Routes = [
     { path: 'patient', component: PatientComponent, canActivate: [AuthGuard] },
     { path: 'patient/:patientId/event', component: EventComponent, canActivate:[AuthGuard]},
     { path: 'patient/:patientId/survey/:surveyId', component: SurveyComponent, canActivate:[AuthGuard]},
+    { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
     //{ path: 'callback', component: CallbackComponent},
     //{ path: 'error', component: ErrorPageComponent},
     { path: '**', redirectTo: '' }

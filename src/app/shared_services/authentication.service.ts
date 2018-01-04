@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
 
 public userLoged: string = "";
+public id = 0;
 
     constructor(
         private http: HttpClient) { }
@@ -24,6 +25,16 @@ public userLoged: string = "";
                 if (user && user['token']) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
+
+                    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                    
+                    if(currentUser.role == 'ROLE_ROOT'){
+                        this.id = 1;
+                    }else if(currentUser.role == 'ROLE_ADMIN'){
+                        this.id = 2;
+                    }else if(currentUser.role == 'ROLE_OPERATOR'){
+                        this.id = 3;
+                    }
                 }
  
             });

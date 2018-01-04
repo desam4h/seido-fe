@@ -2,7 +2,7 @@
   <div class="crud-list">
     <h1>Pacientes</h1>
 
-    <button *ngIf="auth.canCreatePatient()" class="btn btn-info btn-create" type="button" data-toggle="modal" data-target="#patientForm" (click)="onSelectNew()">
+    <button *ngIf="auth.canCreatePatient()" class="btn btn-info" type="button" data-toggle="modal" data-target="#patientForm" (click)="onSelectNew()">
       Crear Paciente
     </button>
     
@@ -51,17 +51,17 @@
           <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" class="form-control" placeholder="Nombre" id="name" 
-              name="name" required="true" [(ngModel)]="selectedPatient.firstName">
+              name="name" required [(ngModel)]="selectedPatient.firstName">
           </div>
           <div class="form-group">
             <label for="lastname">Apellido</label>
             <input type="text" class="form-control" placeholder="Apellido" id="lastname" 
-              name="lastname" required="true" [(ngModel)]="selectedPatient.lastName">
+              name="lastname" required [(ngModel)]="selectedPatient.lastName">
           </div>
           <div class="form-group">
             <label for="nuip">NUIP</label>
             <input type="text" class="form-control" placeholder="NUIP" id="nuip" 
-              name="nuip" required="true" [(ngModel)]="selectedPatient.nuip">
+              name="nuip" required [(ngModel)]="selectedPatient.nuip">
           </div>
         </form>
       </div>

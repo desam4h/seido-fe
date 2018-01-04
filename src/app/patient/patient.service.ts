@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import { Patient } from './patient.model';
 
-
 @Injectable()
 export class PatientService {
   private endpoint: string = environment.apiBaseUrl + "/patient";

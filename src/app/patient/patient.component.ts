@@ -19,7 +19,7 @@ export class PatientComponent {
   private editMode: boolean;
 
   constructor(
-    private service:PatientService,
+    private service: PatientService,
     private router: Router,
     private alertService: AlertService,
     public auth: AuthenticationService) { }
@@ -104,7 +104,6 @@ export class PatientComponent {
         error => {
           if(error.status == 404){
             this.alertService.info('No se encontró ningún paciente');
-            console.log("ssssss ::: ", error);
           }else{
             this.alertService.error('Ocurrió un error haciendo la busqueda');
             console.log("Error searching Patients ::: ", error);
@@ -115,7 +114,6 @@ export class PatientComponent {
       this.patientList = [];
     }
   }
-
 
   private updateList(): void {
     this.alertService.clear();

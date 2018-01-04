@@ -9,8 +9,6 @@ import { AuthenticationService } from '../../shared_services/authentication.serv
 })
 export class HeaderComponent implements OnInit {
 
-  public userName: string = "";
-
   constructor(
     public auth: AuthenticationService,
     private router: Router) { }

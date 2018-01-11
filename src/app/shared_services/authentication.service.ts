@@ -70,7 +70,7 @@ public id = 0;
     }
 
 
-    private logedUserHasRole(hasRole: string) : boolean {
+    public logedUserHasRole(hasRole: string) : boolean {
 
         if (localStorage.getItem('currentUser')) {
             

@@ -74,14 +74,14 @@
             <input type="email" class="form-control" placeholder="Correo Electrónico" id="email" 
               name="email" required [(ngModel)]="selectedUser.email">
           </div>
-          <div class="form-group">
+          <div class="form-group" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">
             <label for="enabled">Habilitado</label>
             <select class="form-control" id="enabled" name="enabled" [(ngModel)]="selectedUser.enabled">
               <option value="1">Habilitado</option>
               <option value="0">Deshabilitado</option>
             </select>
           </div>
-          <div class="form-group">
+          <div class="form-group" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">
             <label for="rol">Rol</label>
             <select class="form-control" id="rol" name="rol" [(ngModel)]="selectedUser.authority.name">
               <option value="ROLE_ROOT">Root</option>
@@ -89,7 +89,7 @@
               <option value="ROLE_OPERATOR">Operador</option>
             </select>
           </div>
-          <div>
+          <div class="form-group" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">
             <label for="company">Empresa</label>
             <select class="form-control" id="company" name="company" [(ngModel)]="selectedUser.company.id">
               <option *ngFor="let comp of companyList" value="{{comp.id}}">{{comp.name}}</option>

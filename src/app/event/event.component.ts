@@ -10,6 +10,7 @@ import { Event } from './event.model';
 import { PatientService } from '../patient/patient.service';
 import { EventService } from './event.service';
 import { SurveyService } from '../survey/survey.service';
+import { AlertService } from '../shared_services/alert.service';
 
 @Component({
   selector: 'app-event',
@@ -30,7 +31,8 @@ export class EventComponent implements OnInit {
     private route: ActivatedRoute,
     private patientService: PatientService,
     private eventService: EventService,
-    private surveyService: SurveyService) { }
+    private surveyService: SurveyService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -48,6 +50,7 @@ export class EventComponent implements OnInit {
         this.patient = patient;
       },
       error => {
+        this.alertService.error('Ocurrió un error encontrando el paciente');
         console.log("Error finding patient ::: ", error);
       }
     );
@@ -62,6 +65,7 @@ export class EventComponent implements OnInit {
         this.filteredEvents = this.buildFilteredEvents(surveys);
       },
       error => {
+        this.alertService.error('Ocurrió un error listando las encuestas');
         console.log("Error listing surveys ::: ", error);
       }
     );
@@ -126,6 +130,10 @@ export class EventComponent implements OnInit {
   onSelectNewEvent(): void {
     this.newEvent = Event.empty();
   }
+  
+  onSelectDeleteEvent(event: Event): void {
+    this.newEvent = event;
+  }
 
   onSaveEvent() {
     this.newEvent.specialty = this.selectedSpecialty;
@@ -135,22 +143,28 @@ export class EventComponent implements OnInit {
         this.buildSurveysInfo(this.patient.id);
       },
       error => {
+        this.alertService.error('Ocurrió un error guardando el evento');
         console.log("Error saving event ::: ", error);
       }
     );
   }
 
-  onDeleteEvent(event: Event) {
-    if (confirm("Está seguro de eliminar el evento?")) {
-      this.eventService.delete(this.patient.id, event).subscribe(
-        resp => {
-            this.buildSurveysInfo(this.patient.id);
-        },
-        error => {
+  onDeleteEvent(): void {
+    this.eventService.delete(this.patient.id, this.newEvent).subscribe(
+      resp => {
+        this.newEvent = null;
+        this.buildSurveysInfo(this.patient.id);
+        this.alertService.success('Evento eliminado correctamente');
+      },
+      error => {
+        if(error.status == 424) {
+          this.alertService.warning('El evento tiene dependencias que deben ser eliminadas primero');
+        }else {
+          this.alertService.error('Ocurrió un error eliminando el evento');
           console.log("Error deleting Event ::: ", error);
         }
-      );
-    }
+      }
+    );
   }
 
   getSurveyStateStyle(state: string) {

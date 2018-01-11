@@ -33,8 +33,11 @@
     <p>
       <b>{{event.name}}</b> ({{event.createdDate}})
       <!--
+
+        Si se activa la opción eliminar se debe hacer un popup  llamando primero onSelectDelete
+
       <span class="event-header">
-          <button (click)="onDeleteEvent(event)">
+          <button (click)="onDeleteEvent(event)"> 
               <i class="fa fa-trash" aria-hidden="true" title="Eliminar Evento"></i>
           </button>
       </span>

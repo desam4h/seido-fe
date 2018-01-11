@@ -59,12 +59,24 @@ export class UserComponent implements OnInit {
   }
   
   onSave(): void {
+    if (localStorage.getItem('currentUser')) {
+      let logedUser = JSON.parse(localStorage.getItem('currentUser'));
+
+      if(logedUser.role == "ROLE_ADMIN" && !this.editMode){
+        this.selectedUser.authority.name = "ROLE_OPERATOR";
+        this.selectedUser.company.id = logedUser.companyid;
+      }
+    }
+
     if(this.selectedUser.username != null && this.selectedUser.username != '' &&
       this.selectedUser.password != null && this.selectedUser.password != '' &&
       this.selectedUser.firstname != null && this.selectedUser.firstname != '' &&
       this.selectedUser.lastname != null && this.selectedUser.lastname != '' &&
       this.selectedUser.authority.name != null &&
       this.selectedUser.company.id != null){
+
+
+        console.log("::::: " + JSON.stringify(this.selectedUser));
 
         if(this.selectedUser.authority.name == 'ROLE_ROOT'){
           this.selectedUser.authority.id = 1;
@@ -79,7 +91,7 @@ export class UserComponent implements OnInit {
             this.service.update(this.selectedUser).subscribe(
               user => {
                 this.selectedUser = null;
-                this.updateList();
+                this.userList = [];
               },
               error => {
                 this.alertService.error('Ocurrió un error actualizando el usuario');
@@ -91,7 +103,7 @@ export class UserComponent implements OnInit {
           this.service.save(this.selectedUser).subscribe(
             user => {
               this.selectedUser = null;
-              this.updateList();
+              this.userList = [];
             },
             error => {
               this.alertService.error('El usuario ya existe');
@@ -110,7 +122,7 @@ export class UserComponent implements OnInit {
       this.service.update(this.selectedUser).subscribe(
         user => {
           this.selectedUser = null;
-          this.updateList();
+          this.userList = [];
         },
         error => {
           this.alertService.error('Ocurrió un error actualizando el usuario');
@@ -126,12 +138,16 @@ export class UserComponent implements OnInit {
     this.service.delete(this.selectedUser).subscribe(
       resp => {
         this.selectedUser = null;
-        this.updateList();
+        this.userList = [];
         this.alertService.success('Usuario eliminado correctamente');
       },
       error => {
-        this.alertService.error('Ocurrió un error eliminando el usuario');
-        console.log("Error deleting User ::: ", error);
+        if(error.status == 409) {
+          this.alertService.warning('No es posible eliminar su mismo usuario');
+        }else {
+          this.alertService.error('Ocurrió un error eliminando el usuario');
+          console.log("Error deleting User ::: ", error);
+        }
       }
     );
   }
@@ -145,8 +161,10 @@ export class UserComponent implements OnInit {
         },
         error => {
           if(error.status == 404){
+            this.userList = [];
             this.alertService.info('No se encontró ningún usuario');
           }else{
+            this.userList = [];
             this.alertService.error('Ocurrió un error haciendo la busqueda');
             console.log("Error searching Users ::: ", error);
           }

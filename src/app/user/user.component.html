@@ -16,9 +16,24 @@
     
     <div *ngIf="userList && userList.length > 0">
       <div *ngFor="let user of userList" class="patient-box">
-        <p>
-          Usuario: {{user.username}} - {{user.firstname}} {{user.lastname}} - {{user.authority.name}} - {{user.company.name}}
-        </p>
+        <div>
+          Usuario: {{user.username}}<br>
+          Nombre: {{user.firstname}} {{user.lastname}}<br>
+
+          <div *ngIf="user.authority.name == 'ROLE_ROOT'">
+            Rol: Root<br>
+          </div>
+
+          <div *ngIf="user.authority.name == 'ROLE_ADMIN'">
+            Rol: Administrador<br>
+          </div>
+
+          <div *ngIf="user.authority.name == 'ROLE_OPERATOR'">
+            Rol: Operador<br>
+          </div>
+          
+          Empresa: {{user.company.name}}<br><br>
+        </div>
       
         <button class="btn btn-info btn-xs" type="button" data-toggle="modal" data-target="#userForm"
           (click)="onSelectDetail(user)" title="Editar">

@@ -1,7 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   
-  <a class="navbar-brand" href="/">
-    <i class="fa fa-user-md" aria-hidden="true"></i> Seido
+  <a class="navbar-brand" href="/" *ngIf="!auth.isAuthenticated()">
+    <img class="logo" src="assets/images/logo.png" alt="Seido"> Seido
+  </a>
+
+  <a class="navbar-brand" href="javascript:window.location.href=window.location.href" *ngIf="auth.isAuthenticated()">
+    <img class="logo" src="assets/images/logo.png" alt="Seido"> Seido
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">

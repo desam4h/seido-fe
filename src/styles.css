@@ -53,3 +53,6 @@ table td{
     border: 1px solid rgb(0,182,141);
     padding: 10px; 
  }
+
+ @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+ 

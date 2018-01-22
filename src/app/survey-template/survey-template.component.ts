@@ -118,8 +118,9 @@ export class SurveyTemplateComponent {
 
     this.surveyService.getStatistics(survey).subscribe(
       resp => {
+        var blob = new Blob([resp.message], {type: "text/plain; charset=utf-8"});
         let a = document.createElement("a");
-        a.href = URL.createObjectURL(resp.blob());
+        a.href = window.URL.createObjectURL(blob);
         a.download = "info.csv";
         a.click();
       },

@@ -33,8 +33,7 @@ export class SurveyTemplateService {
 
   getStatistics(template: SurveyTemplate): Observable<any> {
     let url: string = this.buildApiUrl(template.specialty.id, template.id);
-    return this.http.get(`${url}/statistics`, {responseType: 'blob'});
-    //.map(resp => resp;
+    return this.http.get(`${url}/statistics`, this.jwt());
   }
 
   uploadInfo(template: SurveyTemplate, info: string): Observable<any>{

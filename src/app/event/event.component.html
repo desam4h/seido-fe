@@ -3,6 +3,13 @@
     <span>({{patient.nuip}})</span>
   </h2>
 </div>
+
+<div *ngIf="hasBasicSurveysFinished()" class="table-event-wrapper text-right">
+  <button class="btn btn-info btn-create" type="button" data-toggle="modal" data-target="#eventForm" (click)="onSelectNewEvent()">
+    Crear Evento
+  </button>
+</div>
+
 <div *ngIf="specialties && specialties.length > 1">
   <p>
     Especialidad:
@@ -50,21 +57,13 @@
   </div>
 </div>
 
-<div *ngIf="hasBasicSurveysFinished()" class="table-event-wrapper text-center">
-  <button class="btn btn-info btn-create" type="button" data-toggle="modal" data-target="#eventForm" (click)="onSelectNewEvent()">
-    Crear Evento
-  </button>
-</div>
-
 <!-- Event form -->
 <div class="modal fade" id="eventForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedSpecialty && newEvent">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
         <h4 class="modal-title" id="myModalLabel">Detalle de Evento</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         <form>

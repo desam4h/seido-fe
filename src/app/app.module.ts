@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared_components/header/header.component';
@@ -52,6 +53,7 @@ import { AuthGuard } from './shared_services/auth.guard';
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
+    HttpModule,
     [BrowserAnimationsModule]
   ],
   providers: [

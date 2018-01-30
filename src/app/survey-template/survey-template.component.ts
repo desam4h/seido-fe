@@ -110,7 +110,7 @@ export class SurveyTemplateComponent {
     );
   }
 
-  downloadStatistics(survey: SurveyTemplate) {
+  downloadStatisticsOld(survey: SurveyTemplate) {
     var options = {
       showLabels: true,
       useBom: false
@@ -127,6 +127,21 @@ export class SurveyTemplateComponent {
       error => {
         this.alertService.error('Ocurrió un error generando el archivo de la plantilla');
         console.log("Error in downloadStatistics of Survey Template ::: ", error);
+      }
+    );
+  }
+  
+  downloadStatistics(survey: SurveyTemplate) {
+    this.surveyService.getStatisticsExcel(survey).subscribe(
+      resp => {
+        let a = document.createElement("a");
+        a.href = window.URL.createObjectURL(resp);
+        a.download = "Estadisticas (" + survey.specialty.name + ") " + survey.name + " [" + new Date().toLocaleString() + "].xlsx";
+        a.click();
+      },
+      error => {
+        this.alertService.error('Ocurrió un error generando el archivo excel de la plantilla');
+        console.log("Error in downloadStatisticsExcel of Survey Template ::: ", error);
       }
     );
   }

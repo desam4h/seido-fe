@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -9,7 +10,7 @@ import { SurveyTemplate } from './survey-template.model';
 @Injectable()
 export class SurveyTemplateService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private http2: Http) { }
 
   list(specialtyId: number): Observable<SurveyTemplate []> {
     let url: string = this.buildApiUrl(specialtyId);
@@ -34,6 +35,16 @@ export class SurveyTemplateService {
   getStatistics(template: SurveyTemplate): Observable<any> {
     let url: string = this.buildApiUrl(template.specialty.id, template.id);
     return this.http.get(`${url}/statistics`, this.jwt());
+  }
+  
+  getStatisticsExcel(template: SurveyTemplate): Observable<any> {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
+    let options = new RequestOptions( { headers: headers, responseType: ResponseContentType.Blob});
+
+    let url: string = this.buildApiUrl(template.specialty.id, template.id);
+    return this.http2.get(`${url}/excel`, options).map(response => {return response.blob()});
   }
 
   uploadInfo(template: SurveyTemplate, info: string): Observable<any>{

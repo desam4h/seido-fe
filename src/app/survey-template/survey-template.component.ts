@@ -20,6 +20,7 @@ export class SurveyTemplateComponent {
   selectedSurvey: SurveyTemplate;
   private editMode: boolean;
   private specialtyId: number;
+  private specialty: Specialty;
 
   @ViewChild('fileUploadField') fileUploadField: ElementRef;
 
@@ -145,6 +146,21 @@ export class SurveyTemplateComponent {
       }
     );
   }
+  
+  downloadAllStatistics() {
+    this.surveyService.getAllStatisticsExcel(this.specialtyId).subscribe(
+      resp => {
+        let a = document.createElement("a");
+        a.href = window.URL.createObjectURL(resp);
+        a.download = "Estadisticas Generales (" + this.specialty.name + ") [" + new Date().toLocaleString() + "].xlsx";
+        a.click();
+      },
+      error => {
+        this.alertService.error('Ocurrió un error generando el archivo excel de la especialidad');
+        console.log("Error in downloadAllStatisticsExcel of Specialty ::: ", error);
+      }
+    );
+  }
 
   uploadFileCsv() {
     console.log("::: Sending request to API");
@@ -175,9 +191,11 @@ export class SurveyTemplateComponent {
     this.alertService.clear();
     this.surveyService.list(specialtyId).subscribe(
       surveys => {
-        this.surveyList = surveys
+        this.surveyList = surveys;
+        this.specialty = surveys[0].specialty;
       },
       error => {
+        this.specialty = null;
         this.alertService.error('Ocurrió un error listando las plantillas');
         console.log("Error listing SurveyTemplates ::: ", error);
       }

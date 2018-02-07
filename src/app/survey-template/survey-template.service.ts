@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
 import { SurveyTemplate } from './survey-template.model';
+import { Specialty } from '../specialty/specialty.model';
 
 @Injectable()
 export class SurveyTemplateService {
@@ -46,6 +47,16 @@ export class SurveyTemplateService {
     let url: string = this.buildApiUrl(template.specialty.id, template.id);
     return this.http2.get(`${url}/excel`, options).map(response => {return response.blob()});
   }
+  
+  getAllStatisticsExcel(specialtyId: number): Observable<any> {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
+    let options = new RequestOptions( { headers: headers, responseType: ResponseContentType.Blob});
+
+    let url: string = this.buildApiUrl(specialtyId);
+    return this.http2.get(`${url}excelGeneral`, options).map(response => {return response.blob()});
+  }
 
   uploadInfo(template: SurveyTemplate, info: string): Observable<any>{
     let url: string = this.buildApiUrl(template.specialty.id, template.id);
@@ -54,8 +65,8 @@ export class SurveyTemplateService {
   
   // private helper methods
 
-  private buildApiUrl(specialtyId:number, templateId?:number) : string {
-    return `${environment.apiBaseUrl}/specialty/${specialtyId}/surveyTemplate/${templateId || ''}`;
+  private buildApiUrl(specialtyId: number, templateId?: number) : string {
+    return `${environment.apiBaseUrl}/specialty/${specialtyId}/surveyTemplate/${ templateId || ''}`;
   }
 
   private jwt() {

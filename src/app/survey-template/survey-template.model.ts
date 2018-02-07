@@ -6,10 +6,11 @@ export class SurveyTemplate {
         public name: string,
         public jsSurvey: string,
         public type: string,
+        public order_id: number,
         public specialty?: Specialty
     ){}
 
     static empty(): SurveyTemplate {
-        return new SurveyTemplate( null, '', '', 'BASIC_INFO' );
+        return new SurveyTemplate( null, '', '', 'BASIC_INFO', 0 );
     }
 }

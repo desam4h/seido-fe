@@ -9,6 +9,7 @@ import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
 import { AuthGuard } from './shared_services/auth.guard';
 import { UserComponent } from './user/user.component';
+import { Control6Component } from './add-ons/control6/control6.component';
 
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent},
@@ -20,7 +21,6 @@ export const ROUTES: Routes = [
     { path: 'patient/:patientId/event', component: EventComponent, canActivate:[AuthGuard]},
     { path: 'patient/:patientId/survey/:surveyId', component: SurveyComponent, canActivate:[AuthGuard]},
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
-    //{ path: 'callback', component: CallbackComponent},
-    //{ path: 'error', component: ErrorPageComponent},
+    { path: 'control6', component: Control6Component, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];

@@ -68,6 +68,18 @@ public id = 0;
     public isCurrentUserOperator(): boolean {
         return this.isCurrentUserAdmin() || this.logedUserHasRole("ROLE_OPERATOR");
     }
+    
+    public isCurrentUserOnlyAdmin(): boolean {
+        return this.logedUserHasRole("ROLE_ADMIN");
+    }
+
+    public isCurrentUserOnlyOperator(): boolean {
+        return this.logedUserHasRole("ROLE_OPERATOR");
+    }
+    
+    public isCurrentUserAdminOrOperator(): boolean {
+        return this.logedUserHasRole("ROLE_ADMIN") || this.logedUserHasRole("ROLE_OPERATOR");
+    }
 
 
     public logedUserHasRole(hasRole: string) : boolean {

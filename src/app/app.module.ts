@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared_components/header/header.component';
@@ -20,6 +20,7 @@ import { SurveyTemplateComponent } from './survey-template/survey-template.compo
 import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
 import { UserComponent } from './user/user.component';
+import { Control6Component } from './add-ons/control6/control6.component';
 
 import { AlertService } from './shared_services/alert.service';
 import { AuthenticationService } from './shared_services/authentication.service';
@@ -30,6 +31,7 @@ import { SurveyTemplateService } from './survey-template/survey-template.service
 import { PatientService } from './patient/patient.service';
 import { SurveyService } from './survey/survey.service';
 import { EventService } from './event/event.service';
+import { Control6Service } from './add-ons/control6/control6.service';
 import { AuthGuard } from './shared_services/auth.guard';
 
 @NgModule({
@@ -46,7 +48,8 @@ import { AuthGuard } from './shared_services/auth.guard';
     SurveyTemplateComponent,
     EventComponent,
     SurveyComponent,
-    UserComponent
+    UserComponent,
+    Control6Component
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { AuthGuard } from './shared_services/auth.guard';
     PatientService,
     EventService,
     SurveyService,
+    Control6Service,
     AuthGuard
   ],
   bootstrap: [AppComponent]

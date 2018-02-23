@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { ROUTES } from './app.routes';
 
@@ -56,8 +55,7 @@ import { AuthGuard } from './shared_services/auth.guard';
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
-    HttpModule,
-    [BrowserAnimationsModule]
+    HttpModule
   ],
   providers: [
     AlertService,

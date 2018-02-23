@@ -71,10 +71,23 @@
             <label for="name">Nombre</label>
             <input type="text" class="form-control" placeholder="Name" id="name" name="name" required="true" [(ngModel)]="newEvent.name">
           </div>
+        
           <div class="form-group">
-            <label for="name">Fecha Evento</label>
+            <label for="createdDate">Fecha del Evento</label>
             <input type="date" class="form-control" placeholder="yyyy-MM-dd" id="createdDate" name="createdDate" required="true" [(ngModel)]="newEvent.createdDate">
           </div>
+<!--
+          <div class="form-group">
+            <label for="createdDate">Fecha del Evento</label>
+            <div class="input-group">
+              <input matInput [matDatepicker]="picker" class="form-control" placeholder="MM/dd/yyyy" id="createdDate" name="createdDate" required="true" [(ngModel)]="newEvent.createdDate" disabled>
+              <div class="input-group-addon">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+              </div>
+            </div>
+          </div>
+-->
         </form>
       </div>
       <div class="modal-footer">

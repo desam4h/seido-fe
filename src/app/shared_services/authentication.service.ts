@@ -10,6 +10,7 @@ export class AuthenticationService {
 
 public userLoged: string = "";
 public id = 0;
+public addons = null;
 
     constructor(
         private http: HttpClient) { }
@@ -23,10 +24,14 @@ public id = 0;
                 // login successful if there's a jwt token in the response
                 let user = response;
                 if (user && user['token']) {
+
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
 
                     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+                    if(currentUser.addons.length > 0)
+                        this.addons = currentUser.addons;
                     
                     if(currentUser.role == 'ROLE_ROOT'){
                         this.id = 1;
@@ -43,6 +48,7 @@ public id = 0;
     public logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        this.addons = null;
     }
     
     public isAuthenticated(): boolean{

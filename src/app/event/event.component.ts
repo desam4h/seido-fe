@@ -136,17 +136,23 @@ export class EventComponent implements OnInit {
   }
 
   onSaveEvent() {
-    this.newEvent.specialty = this.selectedSpecialty;
+    if(this.newEvent.name != null && this.newEvent.createdDate != null
+      && this.newEvent.name != '' && this.newEvent.createdDate != ''){
 
-    this.eventService.save(this.patient.id, this.newEvent).subscribe(
-      event => {
-        this.buildSurveysInfo(this.patient.id);
-      },
-      error => {
-        this.alertService.error('Ocurrió un error guardando el evento');
-        console.log("Error saving event ::: ", error);
+        this.newEvent.specialty = this.selectedSpecialty;
+
+        this.eventService.save(this.patient.id, this.newEvent).subscribe(
+          event => {
+            this.buildSurveysInfo(this.patient.id);
+          },
+          error => {
+            this.alertService.error('Ocurrió un error guardando el evento');
+            console.log("Error saving event ::: ", error);
+          }
+        );
+      }else{
+        this.alertService.error('Todos los campos son obligatorios');
       }
-    );
   }
 
   onDeleteEvent(): void {

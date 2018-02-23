@@ -28,11 +28,14 @@
         <a class="nav-link" routerLink="/patient" (click)="auth.id = 0">Pacientes</a>
       </li>
 
-      <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && auth.isCurrentUserOnlyAdmin()">
+      <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && auth.isCurrentUserOnlyAdmin() && auth.addons">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="addons">Adicionales <span class="caret"></span></a>
         <div class="dropdown-menu" aria-labelledby="addons">
-          <a class="dropdown-item" routerLink="/control6" (click)="auth.id = 0">Control 6 meses</a>
+          <span *ngFor="let addon of auth.addons">
+            <a *ngIf="addon.enabled" class="dropdown-item" routerLink="/{{addon.path}}" (click)="auth.id = 0">{{addon.name}}</a>
+          </span>
           <!--
+          <a class="dropdown-item" routerLink="/control6" (click)="auth.id = 0">Control 6 meses</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" routerLink="/opcion2" (click)="auth.id = 0">Opción 2</a>
           -->

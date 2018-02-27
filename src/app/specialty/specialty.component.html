@@ -2,7 +2,7 @@
   <div class="crud-list">
     <h1>Especialidades</h1>
 
-    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#specialtyForm" (click)="onSelectNew()">
+    <button class="btn btn-info" type="button" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()" data-toggle="modal" data-target="#specialtyForm" (click)="onSelectNew()">
       Crear Especialidad
     </button>
 
@@ -23,11 +23,11 @@
             <a class="btn btn-info btn-xs" [routerLink]="['/specialty', specialty.id, 'survey-template']" title="Encuestas">
               <i class="fa fa-list" aria-hidden="true"></i>
             </a>
-            <button class="btn btn-info btn-xs" type="button" data-toggle="modal" data-target="#specialtyForm"
+            <button class="btn btn-info btn-xs" type="button" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()" data-toggle="modal" data-target="#specialtyForm"
               (click)="onSelectDetail(specialty)" title="Editar">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
-            <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#delspecialtyForm"
+            <button class="btn btn-danger btn-xs" type="button" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()" data-toggle="modal" data-target="#delspecialtyForm"
               (click)="onSelectDelete(specialty)" title="Eliminar">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>

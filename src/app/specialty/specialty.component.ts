@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Specialty } from './specialty.model';
 import { SpecialtyService } from './specialty.service';
 import { AlertService } from '../shared_services/alert.service';
+import { AuthenticationService } from '../shared_services/authentication.service';
 
 //import { Observable, Subscription } from 'rxjs/Rx';
  
@@ -18,6 +19,7 @@ export class SpecialtyComponent {
   private editMode: boolean;
 
   constructor(
+    public auth: AuthenticationService,
     private service: SpecialtyService,
     private alertService: AlertService) { }
 

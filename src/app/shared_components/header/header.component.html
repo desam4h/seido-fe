@@ -21,7 +21,7 @@
       <li class="nav-item" [ngClass]="{'active': auth.id === 1 }" id="1" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">
         <a class="nav-link" routerLink="/company" (click)="auth.id = 0">Empresas</a>
       </li>
-      <li class="nav-item" [ngClass]="{'active': auth.id === 2 }" id="2" *ngIf="auth.isAuthenticated() && auth.isCurrentUserOnlyAdmin()">
+      <li class="nav-item" [ngClass]="{'active': auth.id === 2 }" id="2" *ngIf="auth.isAuthenticated() && auth.isCurrentUserAdmin()">
         <a class="nav-link" routerLink="/specialty" (click)="auth.id = 0">Especialidades</a>
       </li>
       <li class="nav-item" [ngClass]="{'active': auth.id === 3 }" id="3" *ngIf="auth.isAuthenticated() && auth.isCurrentUserAdminOrOperator()">

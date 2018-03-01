@@ -192,7 +192,8 @@ export class SurveyTemplateComponent {
     this.surveyService.list(specialtyId).subscribe(
       surveys => {
         this.surveyList = surveys;
-        this.specialty = surveys[0].specialty;
+        if(surveys.length>0)
+          this.specialty = surveys[0].specialty;
       },
       error => {
         this.specialty = null;

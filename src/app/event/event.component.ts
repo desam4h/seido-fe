@@ -121,7 +121,7 @@ export class EventComponent implements OnInit {
 
     let eventList : Event[] = Array.from(uniqueEvents.values());
     eventList.forEach(event => {
-      event.surveys.sort(function(a,b) { return a.template.id - b.template.id });
+      event.surveys.sort(function(a,b) { return a.template.order_id - b.template.order_id });
     });
 
     return eventList;

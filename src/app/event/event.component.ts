@@ -11,6 +11,7 @@ import { PatientService } from '../patient/patient.service';
 import { EventService } from './event.service';
 import { SurveyService } from '../survey/survey.service';
 import { AlertService } from '../shared_services/alert.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-event',
@@ -118,7 +119,12 @@ export class EventComponent implements OnInit {
         }
       });
 
-    return Array.from(uniqueEvents.values());
+    let eventList : Event[] = Array.from(uniqueEvents.values());
+    eventList.forEach(event => {
+      event.surveys.sort(function(a,b) { return a.template.id - b.template.id });
+    });
+
+    return eventList;
   }
 
   selectSpecialtyFilter(selectedSpecialty: Specialty) {

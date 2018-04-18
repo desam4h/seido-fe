@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Patient } from './patient.model';
-import { PatientService } from './patient.service';
-import { AlertService } from '../shared_services/alert.service';
-import { AuthenticationService } from './../shared_services/authentication.service';
+import { Patient } from '../patient.model';
+import { PatientService } from '../patient.service';
+import { AlertService } from '../../shared_services/alert.service';
+import { AuthenticationService } from '../../shared_services/authentication.service';
 
 //import { Observable, Subscription } from 'rxjs/Rx';
- 
+
 @Component({
-  selector: 'patient',
-  templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css']
+  selector: 'app-list-patients',
+  templateUrl: './list-patients.component.html',
+  styleUrls: ['./list-patients.component.css']
 })
-export class PatientComponent {
+
+export class ListPatientsComponent implements OnInit {
+  
   patientList: Patient[] = [];
   selectedPatient: Patient;
   private editMode: boolean;
@@ -25,7 +27,7 @@ export class PatientComponent {
     public auth: AuthenticationService) { }
 
   ngOnInit() {
-    //this.updateList();
+    this.updateList();
   }
 
   onSelectDetail(patient: Patient): void {
@@ -92,28 +94,6 @@ export class PatientComponent {
         console.log("Error deleting Patient ::: ", error);
       }
     );
-  }
-
-  search(searchTerm: string){
-    this.alertService.clear();
-    if (searchTerm) {
-      this.service.search(searchTerm).subscribe(
-        resp => {
-         this.patientList = [resp];
-        },
-        error => {
-          if(error.status == 404){
-            this.patientList = [];
-            this.alertService.info('No se encontró ningún paciente');
-          }else{
-            this.alertService.error('Ocurrió un error haciendo la busqueda');
-            console.log("Error searching Patients ::: ", error);
-          }
-        }
-      );
-    } else {
-      this.patientList = [];
-    }
   }
 
   private updateList(): void {

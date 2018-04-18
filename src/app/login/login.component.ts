@@ -41,9 +41,7 @@ export class LoginComponent implements OnInit {
 
                         if(currentUser.role == 'ROLE_ROOT'){
                             this.returnUrl = 'company';
-                        }else if(currentUser.role == 'ROLE_ADMIN'){
-                            this.returnUrl = 'specialty';
-                        }else if(currentUser.role == 'ROLE_OPERATOR'){
+                        }else if(currentUser.role == 'ROLE_ADMIN' || currentUser.role == 'ROLE_OPERATOR'){
                             this.returnUrl = 'patient';
                         }
                     }

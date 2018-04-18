@@ -1,9 +1,17 @@
 <div class="container">
   <div class="crud-list">
     <h1>Pacientes</h1>
+    
+    <button class="btn btn-info btn-option" type="button"  routerLink="/listpatients">
+      Lista
+    </button>
 
-    <button *ngIf="auth.canCreatePatient()" class="btn btn-info" type="button" data-toggle="modal" data-target="#patientForm" (click)="onSelectNew()">
-      Crear Paciente
+    <button class="btn btn-info btn-option" type="button" routerLink="/findpatient">
+      Buscar
+    </button>
+    
+    <button *ngIf="auth.canCreatePatient()" class="btn btn-info btn-option" type="button" data-toggle="modal" data-target="#patientForm" (click)="onSelectNew()">
+      Nuevo
     </button>
     
     <div class="input-group">
@@ -13,7 +21,7 @@
         <button (click)="search(searchBox.value)"><i class="fa fa-search" aria-hidden="true"></i></button>
       </div>
     </div>
-    
+
     <div *ngIf="patientList && patientList.length > 0">
       <div *ngFor="let patient of patientList" class="patient-box">
         <p>

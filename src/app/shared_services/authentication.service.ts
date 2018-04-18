@@ -35,10 +35,8 @@ public addons = null;
                     
                     if(currentUser.role == 'ROLE_ROOT'){
                         this.id = 1;
-                    }else if(currentUser.role == 'ROLE_ADMIN'){
+                    }else if(currentUser.role == 'ROLE_ADMIN' || currentUser.role == 'ROLE_OPERATOR'){
                         this.id = 2;
-                    }else if(currentUser.role == 'ROLE_OPERATOR'){
-                        this.id = 3;
                     }
                 }
  
@@ -105,6 +103,6 @@ public addons = null;
     }
 
     public canCreatePatient(): boolean {
-        return this.isCurrentUserAdmin();
+        return this.isCurrentUserAdminOrOperator();
     }
 }

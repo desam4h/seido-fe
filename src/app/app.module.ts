@@ -14,7 +14,9 @@ import { LoginComponent } from './login/login.component';
 import { AlertComponent } from './shared_components/alert/alert.component';
 import { CompanyComponent } from './company/company.component';
 import { SpecialtyComponent } from './specialty/specialty.component';
-import { PatientComponent } from './patient/patient.component';
+import { MainPatientComponent } from './patient/main-patient/main-patient.component';
+import { FindPatientComponent } from './patient/find-patient/find-patient.component';
+import { ListPatientsComponent } from './patient/list-patients/list-patients.component';
 import { SurveyTemplateComponent } from './survey-template/survey-template.component';
 import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
@@ -43,7 +45,9 @@ import { AuthGuard } from './shared_services/auth.guard';
     AlertComponent,
     CompanyComponent,
     SpecialtyComponent,
-    PatientComponent,
+    MainPatientComponent,
+    FindPatientComponent,
+    ListPatientsComponent,
     SurveyTemplateComponent,
     EventComponent,
     SurveyComponent,

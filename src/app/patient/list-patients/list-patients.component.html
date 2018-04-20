@@ -15,12 +15,13 @@
     </button>
     
     <br/>
+    <br/>
 
     <div *ngIf="patientList && patientList.length > 0">
       <div *ngFor="let patient of patientList" class="patient-box">
-        <p>
+        
           Paciente: {{patient.firstName}} {{patient.lastName}} ({{patient.nuip}})
-        </p>
+        
       
         <div>
           <a class="btn btn-info btn-xs" [routerLink]="['/patient', patient.id, 'event']" title="Eventos">

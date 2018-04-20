@@ -13,6 +13,8 @@
         <button (click)="search(searchBox.value)"><i class="fa fa-search" aria-hidden="true"></i></button>
       </div>
     </div>
+
+    <br/>
     
     <div *ngIf="userList && userList.length > 0">
       <div *ngFor="let user of userList" class="patient-box">

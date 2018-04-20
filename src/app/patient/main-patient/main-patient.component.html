@@ -2,18 +2,30 @@
   <div class="crud-list">
     <h1>Pacientes</h1>
 
-    <button class="btn btn-info btn-option" type="button"  routerLink="/listpatients">
-      Lista
-    </button>
+    <div>
+        
+      <ul>
+        <li>
+          <button *ngIf="auth.canCreatePatient()" class="btn btn-info btn-option" type="button" data-toggle="modal" data-target="#patientForm" (click)="onSelectNew()">
+            Nuevo Paciente
+          </button>
+        </li>
 
-    <button class="btn btn-info btn-option" type="button" routerLink="/findpatient">
-      Buscar
-    </button>
-    
-    <button *ngIf="auth.canCreatePatient()" class="btn btn-info btn-option" type="button" data-toggle="modal" data-target="#patientForm" (click)="onSelectNew()">
-      Nuevo
-    </button>
-    
+        <li>
+          <button class="btn btn-info btn-option" type="button" routerLink="/findpatient">
+            Buscar Paciente
+          </button>
+        </li>
+
+        <li>
+          <button class="btn btn-info btn-option" type="button"  routerLink="/listpatients">
+            Lista de Pacientes
+          </button>
+        </li>
+      </ul>
+
+    </div>
+
   </div>
 </div>
 

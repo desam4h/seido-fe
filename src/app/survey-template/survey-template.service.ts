@@ -33,18 +33,20 @@ export class SurveyTemplateService {
     return this.http.delete(url, this.jwt());
   }
 
+  /*
   getStatistics(template: SurveyTemplate): Observable<any> {
     let url: string = this.buildApiUrl(template.specialty.id, template.id);
     return this.http.get(`${url}/statistics`, this.jwt());
   }
+  */
   
-  getStatisticsExcel(template: SurveyTemplate): Observable<any> {
+  getStatisticsExcel(specialtyId: number, template: SurveyTemplate): Observable<any> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
     let options = new RequestOptions( { headers: headers, responseType: ResponseContentType.Blob});
 
-    let url: string = this.buildApiUrl(template.specialty.id, template.id);
+    let url: string = this.buildApiUrl(specialtyId, template.id);
     return this.http2.get(`${url}/excel`, options).map(response => {return response.blob()});
   }
   
@@ -58,10 +60,12 @@ export class SurveyTemplateService {
     return this.http2.get(`${url}excelGeneral`, options).map(response => {return response.blob()});
   }
 
+  /*
   uploadInfo(template: SurveyTemplate, info: string): Observable<any>{
     let url: string = this.buildApiUrl(template.specialty.id, template.id);
     return this.http.post(`${url}/upload`, info).map(resp => resp);
   }
+  */
   
   // private helper methods
 

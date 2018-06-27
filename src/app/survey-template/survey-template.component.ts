@@ -111,6 +111,7 @@ export class SurveyTemplateComponent {
     );
   }
 
+  /*
   downloadStatisticsOld(survey: SurveyTemplate) {
     var options = {
       showLabels: true,
@@ -131,13 +132,14 @@ export class SurveyTemplateComponent {
       }
     );
   }
+  */
   
   downloadStatistics(survey: SurveyTemplate) {
-    this.surveyService.getStatisticsExcel(survey).subscribe(
+    this.surveyService.getStatisticsExcel(this.specialtyId, survey).subscribe(
       resp => {
         let a = document.createElement("a");
         a.href = window.URL.createObjectURL(resp);
-        a.download = "Estadisticas (" + survey.specialty.name + ") " + survey.name + " [" + new Date().toLocaleString() + "].xlsx";
+        a.download = "Estadisticas (" + this.specialty.name + ") " + survey.name + " [" + new Date().toLocaleString() + "].xlsx";
         a.click();
       },
       error => {
@@ -162,6 +164,7 @@ export class SurveyTemplateComponent {
     );
   }
 
+  /*
   uploadFileCsv() {
     console.log("::: Sending request to API");
 
@@ -186,14 +189,16 @@ export class SurveyTemplateComponent {
       };
     }
   }
+  */
   
   private updateList(specialtyId: number): void {
     this.alertService.clear();
     this.surveyService.list(specialtyId).subscribe(
       surveys => {
         this.surveyList = surveys;
-        if(surveys.length>0)
-          this.specialty = surveys[0].specialty;
+        if(surveys.length>0){
+          this.specialty = surveys[0].specialties.filter(specialty => specialty.id == this.specialtyId)[0];
+        }
       },
       error => {
         this.specialty = null;

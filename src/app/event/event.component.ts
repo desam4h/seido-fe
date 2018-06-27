@@ -84,40 +84,64 @@ export class EventComponent implements OnInit {
     let uniqueSpecialties = new Map<number, Specialty>();
 
     surveys
-      .map(survey => survey.template.specialty)
-      .forEach(item => uniqueSpecialties.set(item.id, item));
+      .map(survey => survey.template.specialties.forEach(specialty => uniqueSpecialties.set(specialty.id, specialty)));
 
     return Array.from(uniqueSpecialties.values());
   }
 
   private buildFilteredBasicSurveys(surveys: Survey[]): Survey[] {
-    return surveys.filter(survey =>
+    let temp1 = new Map<number, Survey>();
+
+    let temp2 = surveys.filter(survey =>
       !survey.event
       && survey.template.type === "BASIC_INFO"
-      && survey.template.specialty.id === this.selectedSpecialty.id
+      //&& survey.template.specialties.forEach(specialty => specialty.id == this.selectedSpecialty.id)
+      //&& survey.template.specialty.id === this.selectedSpecialty.id
     );
+
+    for(let survey of temp2){
+      for(let specialty of survey.template.specialties){
+        if(specialty.id == this.selectedSpecialty.id){
+          temp1.set(survey.id, survey);
+        }
+      }
+    }
+
+    return Array.from(temp1.values());
   }
 
   private buildFilteredEvents(surveys: Survey[]): Event[] {
     let uniqueEvents = new Map<number, Event>();
+    let temp1 = new Map<number, Survey>();
 
-    surveys
-      .filter(survey =>
-        survey.event
-        && survey.template.specialty.id === this.selectedSpecialty.id
-        && survey.template.type === "SPECIALTY_INFO")
-      .map(survey => {
-        let event: Event = survey.event;
-        event.surveys = [survey];
-        return event;
-      })
-      .forEach(event => {
-        if (uniqueEvents.has(event.id)) {
-          uniqueEvents.get(event.id).surveys.push(...event.surveys);
-        } else {
-          uniqueEvents.set(event.id, event);
+    let temp2 = surveys.filter(survey =>
+      survey.event
+      && survey.template.type === "SPECIALTY_INFO"
+      //&& survey.template.specialties.forEach(specialty => specialty.id == this.selectedSpecialty.id)
+    );
+      
+    for(let survey of temp2){
+      for(let specialty of survey.template.specialties){
+        if(specialty.id == this.selectedSpecialty.id){
+          temp1.set(survey.id, survey);
         }
-      });
+      }
+    }
+
+    let temp3 = Array.from(temp1.values());
+      
+    temp3.map(survey => {
+      let event: Event = survey.event;
+      event.surveys = [survey];
+      return event;
+    })
+    .forEach(event => {
+      if (uniqueEvents.has(event.id)) {
+        uniqueEvents.get(event.id).surveys.push(...event.surveys);
+      } else {
+        uniqueEvents.set(event.id, event);
+      }
+    });
 
     let eventList : Event[] = Array.from(uniqueEvents.values());
     eventList.forEach(event => {

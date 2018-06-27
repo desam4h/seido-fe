@@ -7,7 +7,8 @@ export class SurveyTemplate {
         public jsSurvey: string,
         public type: string,
         public order_id: number,
-        public specialty?: Specialty
+        //public specialty?: Specialty
+        public specialties?: Specialty[]
     ){}
 
     static empty(): SurveyTemplate {

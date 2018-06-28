@@ -61,7 +61,8 @@ export class SurveyTemplateComponent {
 
   onSave(): void {
     if(this.selectedSurvey.name != null && this.selectedSurvey.name != '' 
-      && this.selectedSurvey.jsSurvey != null && this.selectedSurvey.jsSurvey != ''){
+      && this.selectedSurvey.jsSurvey != null && this.selectedSurvey.jsSurvey != ''
+      && this.selectedSurvey.order_id != null && this.selectedSurvey.order_id > 0){
 
       if (this.editMode) {
 
@@ -88,8 +89,9 @@ export class SurveyTemplateComponent {
           }
         );
       }
+      
     }else{
-      this.alertService.error('Todos los campos son obligatorios');
+      this.alertService.error('Todos los campos son obligatorios y el campo de orden debe ser mayor a cero');
     }
   }
   

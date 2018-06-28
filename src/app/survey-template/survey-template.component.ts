@@ -20,7 +20,7 @@ export class SurveyTemplateComponent {
   selectedSurvey: SurveyTemplate;
   private editMode: boolean;
   private specialtyId: number;
-  private specialty: Specialty;
+  specialty: Specialty;
 
   @ViewChild('fileUploadField') fileUploadField: ElementRef;
 

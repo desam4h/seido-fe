@@ -19,7 +19,7 @@ export class SpecialtyComponent implements OnInit {
   specialtyList: Specialty[];
   companyList: Company[] = [];
   selectedSpecialty: Specialty;
-  private editMode: boolean;
+  editMode: boolean;
 
   constructor(
     public auth: AuthenticationService,

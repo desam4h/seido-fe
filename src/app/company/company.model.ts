@@ -7,6 +7,6 @@ export class Company {
     ){}
 
     static empty() : Company {
-        return new Company(null, '', '', '');
+        return new Company(0, '', '', '');
     }
 }

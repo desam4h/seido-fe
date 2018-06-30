@@ -11,6 +11,7 @@
         <tr class="table-primary">
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
+          <th *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()" scope="col">Empresa</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
@@ -19,6 +20,7 @@
         <tr *ngFor="let specialty of specialtyList">
           <td>{{specialty.id}}</td>
           <td>{{specialty.name}}</td>
+          <td *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">{{specialty.company.name}}</td>
           <td>
             <a class="btn btn-info btn-xs" [routerLink]="['/specialty', specialty.id, 'survey-template']" title="Encuestas">
               <i class="fa fa-list" aria-hidden="true"></i>
@@ -51,7 +53,13 @@
         <form>
           <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre" id="name" name="name" required="true" [(ngModel)]="selectedSpecialty.name">
+            <input type="text" class="form-control" placeholder="Nombre" id="name" name="name" required="true" autocomplete="off" [(ngModel)]="selectedSpecialty.name">
+          </div>
+          <div class="form-group" *ngIf="auth.isAuthenticated() && auth.isCurrentUserRoot()">
+            <label for="company">Empresa</label>
+            <select class="form-control" id="company" name="company" [(ngModel)]="selectedSpecialty.company.id">
+              <option *ngFor="let comp of companyList" value="{{comp.id}}">{{comp.name}}</option>
+            </select>
           </div>
         </form>
       </div>

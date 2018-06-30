@@ -37,6 +37,16 @@ export class SurveyTemplateComponent {
         this.updateList(this.specialtyId);
       }
     );
+
+    this.specialtyService.find(this.specialtyId).subscribe(
+      specialty => {
+        this.specialty = specialty;
+      },
+      error => {
+        this.alertService.error('Ocurrió un error cargando la información de la especialidad');
+        console.log("Error finding specialty in SurveyTemplateComponet::: ", error);
+      }
+    );
   }
   
   onSelectDetail(survey: SurveyTemplate): void {
@@ -198,9 +208,6 @@ export class SurveyTemplateComponent {
     this.surveyService.list(specialtyId).subscribe(
       surveys => {
         this.surveyList = surveys;
-        if(surveys.length>0){
-          this.specialty = surveys[0].specialties.filter(specialty => specialty.id == this.specialtyId)[0];
-        }
       },
       error => {
         this.specialty = null;

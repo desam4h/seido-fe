@@ -9,6 +9,7 @@ import { Specialty } from '../specialty/specialty.model';
 import { SurveyTemplateService } from './survey-template.service';
 import { AlertService } from '../shared_services/alert.service';
 import { SpecialtyService } from '../specialty/specialty.service';
+import { AuthenticationService } from '../shared_services/authentication.service';
 
 @Component({
   selector: 'survey-template',
@@ -25,6 +26,7 @@ export class SurveyTemplateComponent {
   @ViewChild('fileUploadField') fileUploadField: ElementRef;
 
   constructor(
+    public auth: AuthenticationService,
     private route: ActivatedRoute,
     private surveyService: SurveyTemplateService,
     private specialtyService: SpecialtyService,

@@ -27,11 +27,11 @@
           <a class="btn btn-info btn-xs" [routerLink]="['/patient', patient.id, 'event']" title="Eventos">
             <i class="fa fa-list" aria-hidden="true"></i>
           </a>
-          <button class="btn btn-info btn-xs" type="button" data-toggle="modal" data-target="#patientForm"
+          <button *ngIf="auth.isAuthenticated() && auth.isCurrentUserOnlyAdmin()" class="btn btn-info btn-xs" type="button" data-toggle="modal" data-target="#patientForm"
             (click)="onSelectDetail(patient)" title="Editar">
               <i class="fa fa-pencil" aria-hidden="true"></i>
           </button>
-          <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#delpatientForm"
+          <button *ngIf="auth.isAuthenticated() && auth.isCurrentUserOnlyAdmin()" class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#delpatientForm"
             (click)="onSelectDelete(patient)" title="Eliminar">
               <i class="fa fa-trash" aria-hidden="true"></i>
           </button>

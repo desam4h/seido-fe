@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from './user.model';
-import { Company } from './../company/company.model';
-import { UserService } from './user.service';
-import { CompanyService } from './../company/company.service';
-import { AlertService } from '../shared_services/alert.service';
-import { AuthenticationService } from './../shared_services/authentication.service';
+import { User } from '../user.model';
+import { Company } from '../../company/company.model';
+import { UserService } from '../user.service';
+import { CompanyService } from '../../company/company.service';
+import { AlertService } from '../../shared_services/alert.service';
+import { AuthenticationService } from '../../shared_services/authentication.service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-list-users',
+  templateUrl: './list-users.component.html',
+  styleUrls: ['./list-users.component.css']
 })
-export class UserComponent implements OnInit {
+
+export class ListUsersComponent implements OnInit {
   userList: User[] = [];
   companyList: Company[] = [];
   selectedUser: User;
@@ -27,6 +28,8 @@ export class UserComponent implements OnInit {
     public auth: AuthenticationService) { }
 
   ngOnInit() {
+    this.updateList();
+
     this.companyService.list().subscribe(
       companies => {
         this.companyList = companies;
@@ -75,42 +78,39 @@ export class UserComponent implements OnInit {
       this.selectedUser.authority.name != null &&
       this.selectedUser.company.id != null){
 
+      if(this.selectedUser.authority.name == 'ROLE_ROOT'){
+        this.selectedUser.authority.id = 1;
+      }else if(this.selectedUser.authority.name == 'ROLE_ADMIN'){
+        this.selectedUser.authority.id = 2;
+      }else{
+        this.selectedUser.authority.id = 3;
+      }
 
-        console.log("::::: " + JSON.stringify(this.selectedUser));
+      if (this.editMode) {
 
-        if(this.selectedUser.authority.name == 'ROLE_ROOT'){
-          this.selectedUser.authority.id = 1;
-        }else if(this.selectedUser.authority.name == 'ROLE_ADMIN'){
-          this.selectedUser.authority.id = 2;
-        }else{
-          this.selectedUser.authority.id = 3;
-        }
+        this.service.update(this.selectedUser).subscribe(
+          user => {
+            this.selectedUser = null;
+            this.updateList();
+          },
+          error => {
+            this.alertService.error('Ocurrió un error actualizando el usuario');
+            console.log("Error updating User ::: ", error);
+          }
+        );
+      } else {
 
-        if (this.editMode) {
-
-            this.service.update(this.selectedUser).subscribe(
-              user => {
-                this.selectedUser = null;
-                this.userList = [];
-              },
-              error => {
-                this.alertService.error('Ocurrió un error actualizando el usuario');
-                console.log("Error updating User ::: ", error);
-              }
-            );
-        } else {
-
-          this.service.save(this.selectedUser).subscribe(
-            user => {
-              this.selectedUser = null;
-              this.userList = [];
-            },
-            error => {
-              this.alertService.error('El usuario ya existe');
-              console.log("el usuario ya existe ::: ", error);
-            }
-          );
-        }
+        this.service.save(this.selectedUser).subscribe(
+          user => {
+            this.selectedUser = null;
+            this.updateList();
+          },
+          error => {
+            this.alertService.error('El usuario ya existe');
+            console.log("el usuario ya existe ::: ", error);
+          }
+        );
+      }
     }else{
       this.alertService.error('Todos los campos son obligatorios');
     }
@@ -122,7 +122,7 @@ export class UserComponent implements OnInit {
       this.service.update(this.selectedUser).subscribe(
         user => {
           this.selectedUser = null;
-          this.userList = [];
+          this.updateList();
         },
         error => {
           this.alertService.error('Ocurrió un error actualizando el usuario');
@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
     this.service.delete(this.selectedUser).subscribe(
       resp => {
         this.selectedUser = null;
-        this.userList = [];
+        this.updateList();
         this.alertService.success('Usuario eliminado correctamente');
       },
       error => {
@@ -150,29 +150,6 @@ export class UserComponent implements OnInit {
         }
       }
     );
-  }
-  
-  search(searchTerm: string){
-    this.alertService.clear();
-    if (searchTerm) {
-      this.service.search(searchTerm).subscribe(
-        resp => {
-          this.userList = [resp];
-        },
-        error => {
-          if(error.status == 404){
-            this.userList = [];
-            this.alertService.info('No se encontró ningún usuario');
-          }else{
-            this.userList = [];
-            this.alertService.error('Ocurrió un error haciendo la busqueda');
-            console.log("Error searching Users ::: ", error);
-          }
-        }
-      );
-    } else {
-      this.userList = [];
-    }
   }
   
   private updateList(): void {

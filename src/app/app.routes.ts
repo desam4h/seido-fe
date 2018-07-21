@@ -10,7 +10,9 @@ import { ListPatientsComponent } from './patient/list-patients/list-patients.com
 import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
 import { AuthGuard } from './shared_services/auth.guard';
-import { UserComponent } from './user/user.component';
+import { MainUserComponent } from './user/main-user/main-user.component';
+import { FindUserComponent } from './user/find-user/find-user.component';
+import { ListUsersComponent } from './user/list-users/list-users.component';
 import { Control6Component } from './add-ons/control6/control6.component';
 
 export const ROUTES: Routes = [
@@ -24,7 +26,9 @@ export const ROUTES: Routes = [
     { path: 'listpatients', component: ListPatientsComponent, canActivate: [AuthGuard] },
     { path: 'patient/:patientId/event', component: EventComponent, canActivate:[AuthGuard]},
     { path: 'patient/:patientId/survey/:surveyId', component: SurveyComponent, canActivate:[AuthGuard]},
-    { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+    { path: 'user', component: MainUserComponent, canActivate: [AuthGuard] },
+    { path: 'finduser', component: FindUserComponent, canActivate: [AuthGuard] },
+    { path: 'listusers', component: ListUsersComponent, canActivate: [AuthGuard] },
     { path: 'control6', component: Control6Component, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];

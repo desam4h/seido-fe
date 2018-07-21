@@ -20,7 +20,10 @@ import { ListPatientsComponent } from './patient/list-patients/list-patients.com
 import { SurveyTemplateComponent } from './survey-template/survey-template.component';
 import { EventComponent } from './event/event.component';
 import { SurveyComponent } from './survey/survey.component';
-import { UserComponent } from './user/user.component';
+//import { UserComponent } from './user/user.component';
+import { MainUserComponent } from './user/main-user/main-user.component';
+import { FindUserComponent } from './user/find-user/find-user.component';
+import { ListUsersComponent } from './user/list-users/list-users.component';
 import { Control6Component } from './add-ons/control6/control6.component';
 
 import { AlertService } from './shared_services/alert.service';
@@ -51,7 +54,10 @@ import { AuthGuard } from './shared_services/auth.guard';
     SurveyTemplateComponent,
     EventComponent,
     SurveyComponent,
-    UserComponent,
+    //UserComponent,
+    MainUserComponent,
+    FindUserComponent,
+    ListUsersComponent,
     Control6Component
   ],
   imports: [

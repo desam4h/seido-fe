@@ -55,7 +55,7 @@ export class ListPatientsComponent implements OnInit {
             this.service.update(this.selectedPatient).subscribe(
               patient => {
                 this.selectedPatient = null;
-                this.patientList = [];
+                this.updateList();
               },
               error => {
                 this.alertService.error('Ocurrió un error actualizando el paciente');
@@ -67,7 +67,7 @@ export class ListPatientsComponent implements OnInit {
           this.service.save(this.selectedPatient).subscribe(
             patient => {
               this.selectedPatient = null;
-              this.patientList = [];
+              this.updateList();
               this.router.navigate(['/patient', patient.id, 'event'])
               .catch(error => console.log('Error redirectign to event page'));
             },
@@ -86,7 +86,7 @@ export class ListPatientsComponent implements OnInit {
     this.service.delete(this.selectedPatient).subscribe(
       resp => {
         this.selectedPatient = null;
-        this.patientList = [];
+        this.updateList();
         this.alertService.success('Paciente eliminado correctamente');
       },
       error => {

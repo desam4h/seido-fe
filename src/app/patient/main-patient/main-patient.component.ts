@@ -61,7 +61,7 @@ export class MainPatientComponent {
             },
             error => {
               this.alertService.error('El paciente ya existe');
-              console.log("el paciente ya existe ::: ", error);
+              console.log("El paciente ya existe ::: ", error);
             }
           );
         }

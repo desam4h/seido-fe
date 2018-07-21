@@ -1,9 +1,17 @@
 <div class="container">
   <div class="crud-list">
     <h1>Usuarios</h1>
+    
+    <button class="btn btn-info btn-option" type="button"  routerLink="/listusers">
+      Lista
+    </button>
 
-    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#userForm" (click)="onSelectNew()">
-      Crear Usuario
+    <button class="btn btn-info btn-option" type="button" routerLink="/finduser">
+      Buscar
+    </button>
+    
+    <button class="btn btn-info btn-option" type="button" data-toggle="modal" data-target="#userForm" (click)="onSelectNew()">
+      Nuevo
     </button>
     
     <div class="input-group">
